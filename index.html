@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+<div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="deleteProductModalLabel">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure want to delete the product?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<table>
+	<tr>
+		<th>Thumbnail</th>
+		<th>Product</th>	
+		<th>Delete</th>
+    </tr> 
+    <tr>
+		<td><img src="product-1-thumbnail" alt="Product 1" width="50" height="50" /></td>
+		<td>Product 1</td>	
+		<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#deleteProductModal" data-productid="1" data-productname="Product 1">Delete</button></td>
+    </tr> 
+    <tr>
+		<td><img src="product-2-thumbnail" alt="Product 2" width="50" height="50" /></td>
+		<td>Product 2</td>	
+		<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#deleteProductModal" data-productid="2" data-productname="Product 2">Delete</button></td>
+    </tr> 
+    <tr>
+		<td><img src="product-3-thumbnail" alt="Product 3" width="50" height="50" /></td>
+		<td>Product 3</td>	
+		<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#deleteProductModal" data-productid="3" data-productname="Product 3">Delete</button></td>
+    </tr> 
+</table>
+
+<script>
+$(document).ready(function () {
+	$('#deleteProductModal').on('show.bs.modal', function (event) { // id of the modal with event
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var productid = button.data('productid') // Extract info from data-* attributes
+	  var productname = button.data('productname')
+	  
+	  var title = 'Confirm Delete #' + productid
+	  var content = 'Are you sure want to delete ' + productname + '?'
+	  
+	  // Update the modal's content.
+	  var modal = $(this)
+	  modal.find('.modal-title').text(title)
+	  modal.find('.modal-body').text(content)	  
+	  
+	  // And if you wish to pass the productid to modal's 'Yes' button for further processing
+	  modal.find('button.btn-danger').val(productid)
+	})
+})
+</script>
+</body>
+</html>
